@@ -316,7 +316,10 @@ def build(args):
         # max_obj_id + 1, but the exact value doesn't really matter
         num_classes = 250
     device = torch.device(args.device)
-
+    num_classes_specified_at_run_time = args.num_classes
+    if num_classes_specified_at_run_time is not None:
+        # Override the value hard-coded in this file with the value specified at run-time
+        num_classes = num_classes_specified_at_run_time
     backbone = build_backbone(args)
 
     transformer = build_transformer(args)
